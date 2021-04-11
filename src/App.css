@@ -1,4 +1,11 @@
 html, * {
     padding: 0;
     margin: 0;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 1023px) {
+    .unity {
+        transform: scale(1.3);
+    }
 }

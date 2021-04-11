@@ -33,13 +33,17 @@ const App = () => {
 
   //runs animation and resets back to first unity state once feedPet state updates
   useEffect(() => {
-    unityContext.send("pet", "Eat", "true")
+    unityContext.send("pet", "Eat", "true");
+
     if (feedPet === true) {
       var myVar = setInterval(() => {
-        unityContext.send("pet", "Eat", "false");
+        unityContext.send("pet", "ScaleCloud", 2);
+        unityContext.send("pet", "ScaleResolution", 6); //original scale = 5, scale by +1
+        unityContext.send("pet", "ChangePosition", .45); //from y = .369 to y = .45 -> position change by each scale of 1 = .081 y difference
+        unityContext.send("pet", "Eat", "false"); //gameobject, function name, variable passed to unity
         clearInterval(myVar);
         setFeedPet(false);
-      }, 5000);
+      }, 6000);
     }
   }, [feedPet])
 
@@ -61,6 +65,7 @@ const App = () => {
           margin: "auto",
           visibility: isLoaded ? "visible" : "hidden",
         }}
+        className="unity"
         unityContext={unityContext}
         devicePixelRatio={2} //set graphics quality
       />
